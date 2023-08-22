@@ -1,11 +1,56 @@
-* {
-  margin: 0;
-  padding: 0;
-}
 
 .card {
   margin: 0;
+  width: 25em;
+  height: 30vh;
+  background-color: #eee;
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.timer-clicker {
+  width: 10em;
+  height: 5em;
+  background-color: aquamarine;
   cursor: pointer;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-text {
+  text-align: center;
+}
+
+.timer-text {
+  text-align: center;
+  display: flex;
+}
+
+#card-section {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin:auto;
+  height: 100vh;
+}
+
+#card-holder {
+  display: flex;
+  flex-direction: row;
 }
 
 #card-text {
