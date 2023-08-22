@@ -2,6 +2,7 @@
   --darkGray: #222;
   --gray: #444;
   --lightGray: #555;
+  --blackWhite: #aaa;
   --darkWhite: #eee;
   --white: #fff;
   --aquaMarine: aquamarine;
@@ -48,15 +49,29 @@ li {
   transition: all .25s ease;
 }
 
-.card-text {
+.card-header-text {
   text-align: center;
   font-size: x-large;
+  margin-bottom: 5px;
 }
 
 .timer-text {
   text-align: center;
   display: flex;
   color: var(--gray)
+}
+
+.timer-length {
+  color: var(--blackWhite);
+  font-style: italic;
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
 }
 
 #nav-bar {
