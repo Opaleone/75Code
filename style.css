@@ -1,22 +1,46 @@
+:root {
+  --darkGray: #222;
+  --gray: #444;
+  --lightGray: #555;
+  --darkWhite: #eee;
+  --white: #fff;
+  --aquaMarine: aquamarine;
+
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+  color: var(--darkWhite);
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--darkGray);
+}
+
+li {
+  list-style: none;
+}
 
 .card {
   margin: 0;
   width: 25em;
   height: 30vh;
-  background-color: #eee;
+  background-color: var(--gray);
   margin: 0 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  box-shadow: 7px 5px 3px var(--lightGray);
 }
 
 .timer-clicker {
   width: 10em;
   height: 5em;
-  background-color: aquamarine;
-  cursor: pointer;
+  background-color: var(--aquaMarine);
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -26,11 +50,37 @@
 
 .card-text {
   text-align: center;
+  font-size: x-large;
 }
 
 .timer-text {
   text-align: center;
   display: flex;
+  color: var(--gray)
+}
+
+#nav-bar {
+  margin: auto;
+  padding: 0 10px;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 5em;
+  width: 100%;
+  background-color: var(--gray);
+}
+
+#title-text {
+  margin: 0;
+  margin-left: 50px;
+  font-size: 50px;
+}
+
+#length-of-days {
+  margin-right: 30px;
 }
 
 #card-section {
@@ -60,4 +110,5 @@
 
 .timer-clicker:hover {
   width: 13em;
+  cursor: pointer;
 }
