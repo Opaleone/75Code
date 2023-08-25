@@ -3,10 +3,8 @@ const card = document.querySelector('.card');
 const timer = document.querySelectorAll('.timer-clicker')
 const timerLength = document.querySelectorAll('.timer-length')
 
-// console.log(parseInt(timerLength[0].innerHTML))
 
-
-const handleTimerClick = (time) => {
+const handleTimerClick = (time, timerChild) => {
   let timeInMs = time
   
   const future = new Date().valueOf() + timeInMs
@@ -25,19 +23,28 @@ const handleTimerClick = (time) => {
 
   console.log(`${h}h ${m}m ${s}s`)
 
+
+  timerChild.style.color = "#444"
+  timerChild.innerHTML = `${h}h ${m}m ${s}s`
+
   // console.log()
 }
-
-// handleTimerClick(parseInt(timerLength[i].innerHTML))
-
 
 
 for (let i = 0; i < timer.length; i++) {
   timer[i].addEventListener('click', function() {
-    setInterval(function () {
-      let timeInMs = parseInt(timerLength[i].innerHTML) * 60000;
-
-      handleTimerClick(timeInMs)
+    let timerStopCondition = parseInt(timerLength[i].innerHTML) * 60000 / 1000 + 1;
+    let timeInMs = parseInt(timerLength[i].innerHTML) * 60000;
+    let timesRun = 0
+    
+    let interval = setInterval(function () {
+      timesRun++
+      if (timesRun === timerStopCondition) {
+        clearInterval(interval)
+        timer[i].style.display = 'none';
+        timerLength[i].innerHTML = 'Done!'
+      }
+      handleTimerClick(timeInMs, timer[i])
 
       timeInMs -= 1000
     }, 1000)
