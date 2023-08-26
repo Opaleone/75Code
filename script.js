@@ -5,9 +5,7 @@ const timerLength = document.querySelectorAll('.timer-length')
 
 
 
-const handleTimerClick = (time) => {
-  const timerTimeP = document.querySelector('.timer-time')
-
+const handleTimerClick = (time, selectedTimerTimeP) => {
   let timeInMs = time
   
   const future = new Date().valueOf() + timeInMs
@@ -24,7 +22,7 @@ const handleTimerClick = (time) => {
   const m = mins - hours * 60;
   const s = secs - mins * 60;
 
-  timerTimeP.innerHTML = `${h}h ${m}m ${s}s`
+  selectedTimerTimeP.innerHTML = `${h}h ${m}m ${s}s`
 
   // console.log()
 }
@@ -57,16 +55,18 @@ for (let i = 0; i < timer.length; i++) {
     let timesRun = 0;
     
     timerDisplay(timer[i], targetCard)
+
+    const timerTimeP = document.querySelectorAll('.timer-time')
     
     let interval = setInterval(function start() {
       if (timesRun === timerStopCondition) {
         clearInterval(interval)
-        timer[i].style.display = 'none';
+        timerTimeP[i].style.display = 'none';
         timerLength[i].innerHTML = 'Done!'
       }
       timesRun++
 
-      handleTimerClick(timeInMs)
+      handleTimerClick(timeInMs, timerTimeP[i])
 
       timeInMs -= 1000
 
