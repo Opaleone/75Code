@@ -1,10 +1,13 @@
 const main = document.querySelector('#main');
-const card = document.querySelector('.card');
+const card = document.querySelectorAll('.card');
 const timer = document.querySelectorAll('.timer-clicker')
 const timerLength = document.querySelectorAll('.timer-length')
 
 
-const handleTimerClick = (time, timerChild) => {
+
+const handleTimerClick = (time) => {
+  const timerTimeP = document.querySelector('.timer-time')
+
   let timeInMs = time
   
   const future = new Date().valueOf() + timeInMs
@@ -21,30 +24,49 @@ const handleTimerClick = (time, timerChild) => {
   const m = mins - hours * 60;
   const s = secs - mins * 60;
 
-  console.log(`${h}h ${m}m ${s}s`)
-
-
-  timerChild.style.color = "#444"
-  timerChild.innerHTML = `${h}h ${m}m ${s}s`
+  timerTimeP.innerHTML = `${h}h ${m}m ${s}s`
 
   // console.log()
 }
 
 
+
+const timerDisplay = (timerDiv, selectedCard) => {
+  const parentDiv = selectedCard
+
+  const newDiv = document.createElement('div');
+  const newP = document.createElement('p');
+
+  newDiv.classList.add('timer-display');
+  newP.classList.add('timer-time');
+
+  timerDiv.style.display = 'none';
+
+  newDiv.appendChild(newP);
+  parentDiv.appendChild(newDiv);
+}
+
+
+
 for (let i = 0; i < timer.length; i++) {
   timer[i].addEventListener('click', function() {
-    let timerStopCondition = parseInt(timerLength[i].innerHTML) * 60000 / 1000 + 1;
+    const targetCard = card[i];
+
+    let timerStopCondition = parseInt(timerLength[i].innerHTML) * 60000 / 1000;
     let timeInMs = parseInt(timerLength[i].innerHTML) * 60000;
-    let timesRun = 0
+    let timesRun = 0;
+    
+    timerDisplay(timer[i], targetCard)
     
     let interval = setInterval(function () {
-      timesRun++
       if (timesRun === timerStopCondition) {
         clearInterval(interval)
         timer[i].style.display = 'none';
         timerLength[i].innerHTML = 'Done!'
       }
-      handleTimerClick(timeInMs, timer[i])
+      timesRun++
+
+      handleTimerClick(timeInMs)
 
       timeInMs -= 1000
     }, 1000)
