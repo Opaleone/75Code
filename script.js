@@ -58,7 +58,7 @@ for (let i = 0; i < timer.length; i++) {
     
     timerDisplay(timer[i], targetCard)
     
-    let interval = setInterval(function () {
+    let interval = setInterval(function start() {
       if (timesRun === timerStopCondition) {
         clearInterval(interval)
         timer[i].style.display = 'none';
@@ -69,6 +69,8 @@ for (let i = 0; i < timer.length; i++) {
       handleTimerClick(timeInMs)
 
       timeInMs -= 1000
-    }, 1000)
+
+      return start
+    }(), 1000)
   })
 }
