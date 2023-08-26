@@ -74,6 +74,19 @@ li {
   margin: 20px;
 }
 
+.timer-display {
+  width: 10em;
+  height: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-time {
+  font-size: 30px;
+
+}
+
 #nav-bar {
   margin: auto;
   padding: 0 10px;
