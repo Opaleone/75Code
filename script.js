@@ -4,7 +4,7 @@ const timer = document.querySelectorAll('.timer-clicker')
 const timerLength = document.querySelectorAll('.timer-length')
 
 
-
+// Handles logic for timer countdown
 const handleTimerClick = (time, selectedTimerTimeP) => {
   let timeInMs = time
   
@@ -23,12 +23,10 @@ const handleTimerClick = (time, selectedTimerTimeP) => {
   const s = secs - mins * 60;
 
   selectedTimerTimeP.innerHTML = `${h}h ${m}m ${s}s`
-
-  // console.log()
 }
 
 
-
+// Creates new div for time display & hides start btn
 const timerDisplay = (timerDiv, selectedCard) => {
   const parentDiv = selectedCard
 
@@ -45,7 +43,7 @@ const timerDisplay = (timerDiv, selectedCard) => {
 }
 
 
-
+// Creates event listener for each timer start btn
 for (let i = 0; i < timer.length; i++) {
   timer[i].addEventListener('click', function() {
     const targetCard = card[i];
@@ -56,12 +54,13 @@ for (let i = 0; i < timer.length; i++) {
     
     timerDisplay(timer[i], targetCard)
 
-    const timerTimeP = document.querySelectorAll('.timer-time')
+    const timerTimeP = document.querySelectorAll('.timer-time');
+    const timerDisplayDiv = document.querySelectorAll('.timer-display');
     
     let interval = setInterval(function start() {
       if (timesRun === timerStopCondition) {
         clearInterval(interval)
-        timerTimeP[i].style.display = 'none';
+        timerDisplayDiv[i].style.display = 'none';
         timerLength[i].innerHTML = 'Done!'
       }
       timesRun++
