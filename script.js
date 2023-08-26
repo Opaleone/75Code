@@ -1,14 +1,14 @@
 const main = document.querySelector('#main');
 const card = document.querySelectorAll('.card');
-const timer = document.querySelectorAll('.timer-clicker')
-const timerLength = document.querySelectorAll('.timer-length')
+const timer = document.querySelectorAll('.timer-clicker');
+const timerLength = document.querySelectorAll('.timer-length');
 
 
 // Handles logic for timer countdown
 const handleTimerClick = (time, selectedTimerTimeP) => {
-  let timeInMs = time
+  let timeInMs = time;
   
-  const future = new Date().valueOf() + timeInMs
+  const future = new Date().valueOf() + timeInMs;
   const now = new Date().valueOf();
   const diff = future - now;
 
@@ -22,13 +22,14 @@ const handleTimerClick = (time, selectedTimerTimeP) => {
   const m = mins - hours * 60;
   const s = secs - mins * 60;
 
-  selectedTimerTimeP.innerHTML = `${h}h ${m}m ${s}s`
+  selectedTimerTimeP.innerHTML = `${h}h ${m}m ${s}s`;
+  document.title = `${h}h ${m}m ${s}s`;
 }
 
 
 // Creates new div for time display & hides start btn
 const timerDisplay = (timerDiv, selectedCard) => {
-  const parentDiv = selectedCard
+  const parentDiv = selectedCard;
 
   const newDiv = document.createElement('div');
   const newP = document.createElement('p');
@@ -52,7 +53,7 @@ for (let i = 0; i < timer.length; i++) {
     let timeInMs = parseInt(timerLength[i].innerHTML) * 60000;
     let timesRun = 0;
     
-    timerDisplay(timer[i], targetCard)
+    timerDisplay(timer[i], targetCard);
 
     const timerTimeP = document.querySelectorAll('.timer-time');
     const timerDisplayDiv = document.querySelectorAll('.timer-display');
@@ -62,14 +63,14 @@ for (let i = 0; i < timer.length; i++) {
         clearInterval(interval)
         timerDisplayDiv[i].style.display = 'none';
         timerLength[i].innerHTML = 'Done!'
-      }
-      timesRun++
+      };
+      timesRun++;
 
-      handleTimerClick(timeInMs, timerTimeP[i])
+      handleTimerClick(timeInMs, timerTimeP[i]);
 
-      timeInMs -= 1000
+      timeInMs -= 1000;
 
-      return start
-    }(), 1000)
-  })
-}
+      return start;
+    }(), 1000);
+  });
+};
