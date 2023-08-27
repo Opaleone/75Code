@@ -27,36 +27,18 @@ const handleTimerClick = (time, selectedTimerTimeP) => {
 }
 
 
-// Creates new div for time display & hides start btn
-const timerDisplay = (timerDiv, selectedCard) => {
-  const parentDiv = selectedCard;
-
-  const newDiv = document.createElement('div');
-  const newP = document.createElement('p');
-
-  newDiv.classList.add('timer-display');
-  newP.classList.add('timer-time');
-
-  timerDiv.style.display = 'none';
-
-  newDiv.appendChild(newP);
-  parentDiv.appendChild(newDiv);
-}
-
-
 // Creates event listener for each timer start btn
 for (let i = 0; i < timer.length; i++) {
   timer[i].addEventListener('click', function() {
-    const targetCard = card[i];
+    const timerTimeP = document.querySelectorAll('.timer-time');
+    const timerDisplayDiv = document.querySelectorAll('.timer-display');
 
     let timerStopCondition = parseInt(timerLength[i].innerHTML) * 60000 / 1000;
     let timeInMs = parseInt(timerLength[i].innerHTML) * 60000;
     let timesRun = 0;
-    
-    timerDisplay(timer[i], targetCard);
 
-    const timerTimeP = document.querySelectorAll('.timer-time');
-    const timerDisplayDiv = document.querySelectorAll('.timer-display');
+    timer[i].style.display = 'none';
+    timerDisplayDiv[i].style.display = 'flex';
     
     let interval = setInterval(function start() {
       if (timesRun === timerStopCondition) {
