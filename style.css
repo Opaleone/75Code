@@ -77,7 +77,7 @@ li {
 .timer-display {
   width: 10em;
   height: 5em;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
