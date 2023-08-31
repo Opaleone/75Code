@@ -2,6 +2,16 @@ const main = document.querySelector('#main');
 const card = document.querySelectorAll('.card');
 const timer = document.querySelectorAll('.timer-clicker');
 const timerLength = document.querySelectorAll('.timer-length');
+const days = document.querySelector('#day-counter');
+
+
+let dayCtr = localStorage.getItem('dayCtr');
+
+if (!dayCtr) {
+  localStorage.setItem('dayCtr', 0);
+} else {
+  days.textContent = dayCtr;
+}
 
 
 // Handles logic for timer countdown
