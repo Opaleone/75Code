@@ -87,6 +87,10 @@ li {
 
 }
 
+.inline {
+  display: inline;
+}
+
 #nav-bar {
   margin: auto;
   position: fixed;
