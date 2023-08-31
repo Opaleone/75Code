@@ -139,9 +139,37 @@ li {
   cursor: pointer;
 }
 
+#nav-underline {
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(0.25turn, #11998E, #38EF7D);
+  position: fixed;
+  top: 5em;
+
+  -webkit-animation: Animation 5s ease infinite;
+  -moz-animation: Animation 5s ease infinite;
+  animation: Animation 5s ease infinite;
+}
+
 .timer-clicker:hover {
   width: 13em;
   cursor: pointer;
+}
+
+@-webkit-keyframes Animation {
+  0%{background-position:10% 0%}
+  50%{background-position:91% 100%}
+  100%{background-position:10% 0%}
+}
+@-moz-keyframes Animation {
+  0%{background-position:10% 0%}
+  50%{background-position:91% 100%}
+  100%{background-position:10% 0%}
+}
+@keyframes Animation { 
+  0%{background-position:10% 0%}
+  50%{background-position:91% 100%}
+  100%{background-position:10% 0%}
 }
 
 @media screen and (min-width: 1223px) {
