@@ -4,15 +4,26 @@ const timer = document.querySelectorAll('.timer-clicker');
 const timerLength = document.querySelectorAll('.timer-length');
 const days = document.querySelector('#day-counter');
 
+let taskCtr = 0;
 
 let dayCtr = localStorage.getItem('dayCtr');
+
+(function checkTime () {
+  const dayCtrCreateDate = localStorage.getItem("dayCtrCreateDate");
+  const timePassed = Date.now() - Number(dayCtrCreateDate);
+
+  if (timePassed > 1) {
+    localStorage.removeItem("dayCtr");
+  }
+})();
+
+localStorage.setItem("dayCtrCreateDate", Date.now());
 
 if (!dayCtr) {
   localStorage.setItem('dayCtr', 0);
 } else {
   days.textContent = dayCtr;
 }
-
 
 // Handles logic for timer countdown
 const handleTimerClick = (time, selectedTimerTimeP) => {
@@ -63,6 +74,19 @@ for (let i = 0; i < timer.length; i++) {
       timeInMs -= 1000;
 
       return start;
-    }(), 1000);
+    }(), 1);
   });
 };
+
+// let completeCheck = setInterval(function () {
+//   for (let i = 0; i < timerLength.length; i++) {
+//     if (timerLength[i].innerHTML === 'Done!') {
+//       taskCtr++;
+//     } 
+//   }
+
+//   if (taskCtr === timerLength.length) {
+//     clearInterval(completeCheck)
+//   }
+//   console.log(taskCtr);
+// }, 1000)
