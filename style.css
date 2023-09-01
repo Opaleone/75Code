@@ -190,6 +190,7 @@ li {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 6em;
   }
 
   #card-holder {
@@ -202,6 +203,11 @@ li {
 
   #length-of-days {
     margin: 0;
+  }
+
+  #nav-underline {
+    position: sticky;
+    top: 6em;
   }
 }
 
@@ -218,6 +224,7 @@ li {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 6em;
   }
 
   #card-holder {
@@ -232,4 +239,8 @@ li {
     margin: 0;
   }
   
+  #nav-underline {
+    position: sticky;
+    top: 6em;
+  }
 }
