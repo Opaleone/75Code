@@ -4,9 +4,11 @@ const timer = document.querySelectorAll('.timer-clicker');
 const timerLength = document.querySelectorAll('.timer-length');
 const days = document.querySelector('#day-counter');
 
+
 let dayCtr = localStorage.getItem('dayCtr');
 let taskCtr = localStorage.getItem('taskCtr');
 let midnight = localStorage.getItem('midnight');
+
 
 // setting today midnight
 const todayMidnight = new Date();
@@ -36,10 +38,28 @@ const pastMidnight = () => {
   }
 
   if (pastMidnight()) {
-    localStorage.setItem('midnight', midnightUnix)
+    reset();
+  } else if (!pastMidnight() && taskCtr === timer.length) {
+    complete();
   }
 
 })();
+
+const reset = () => {
+  localStorage.setItem('midnight', midnightUnix)
+
+  for (let i = 0; i < timer.length; i++) {
+    timerLength[i].innerHTML = timerLength[i].textContent;
+    timer[i].style.display = 'flex';
+  }
+}
+
+const complete = () => {
+  for (let i = 0; i < timer[i]; i++) {
+    timerLength[i].innerHTML = 'Done!';
+    timer[i].style.display = 'none';
+  }
+}
 
 // Handles logic for timer countdown
 const handleTimerClick = (time, selectedTimerTimeP) => {
