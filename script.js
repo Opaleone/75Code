@@ -29,6 +29,23 @@ const pastMidnight = () => {
   return rightNow > midnight;
 }
 
+const reset = () => {
+  localStorage.setItem('midnight', midnightUnix);
+  localStorage.setItem('taskCtr', 0);
+
+  for (let i = 0; i < timer.length; i++) {
+    timerLength[i].innerHTML = timerLength[i].textContent;
+    timer[i].style.display = 'flex';
+  }
+}
+
+const complete = () => {
+  for (let i = 0; i < timer.length; i++) {
+    timerLength[i].innerHTML = 'Done!';
+    timer[i].style.display = 'none';
+  }
+}
+
 // Initializes local storage items if there are none
 (function setLocalStorageItems() {
   if (!dayCtr) {
@@ -47,27 +64,12 @@ const pastMidnight = () => {
 
   if (pastMidnight()) {
     reset();
-  } else if (!pastMidnight() && taskCtr === timer.length) {
+  } else if (!pastMidnight() && parseInt(taskCtr) === timer.length) {
     complete();
   }
 
 })();
 
-const reset = () => {
-  localStorage.setItem('midnight', midnightUnix)
-
-  for (let i = 0; i < timer.length; i++) {
-    timerLength[i].innerHTML = timerLength[i].textContent;
-    timer[i].style.display = 'flex';
-  }
-}
-
-const complete = () => {
-  for (let i = 0; i < timer[i]; i++) {
-    timerLength[i].innerHTML = 'Done!';
-    timer[i].style.display = 'none';
-  }
-}
 
 // Handles logic for timer countdown
 const handleTimerClick = (time, selectedTimerTimeP) => {
