@@ -15,7 +15,11 @@ const todayMidnight = new Date();
 todayMidnight.setDate(todayMidnight.getDate() + 1)
 todayMidnight.setUTCHours(0,0,0,0);
 
-const midnightUnix = Math.floor(todayMidnight.getTime() / 1000);
+// Adjusts midnight according to Timezone user is in
+const midnightTimezone = todayMidnight.getTimezoneOffset() * 60;
+
+// Converts midnight to unix timestamp and adds timezone offset for midnight according to user location
+const midnightUnix = Math.floor(todayMidnight.getTime() / 1000 + midnightTimezone);
 
 // Retrieving current time and converting date to UNIX
 const rightNow = Math.floor(new Date() / 1000);
@@ -35,6 +39,10 @@ const pastMidnight = () => {
   
   if (!taskCtr) {
     localStorage.setItem('taskCtr', 0);
+  }
+
+  if (!midnight) {
+    localStorage.setItem('midnight', midnightUnix)
   }
 
   if (pastMidnight()) {
