@@ -4,26 +4,42 @@ const timer = document.querySelectorAll('.timer-clicker');
 const timerLength = document.querySelectorAll('.timer-length');
 const days = document.querySelector('#day-counter');
 
-let taskCtr = 0;
-
 let dayCtr = localStorage.getItem('dayCtr');
+let taskCtr = localStorage.getItem('taskCtr');
+let midnight = localStorage.getItem('midnight');
 
-(function checkTime () {
-  const dayCtrCreateDate = localStorage.getItem("dayCtrCreateDate");
-  const timePassed = Date.now() - Number(dayCtrCreateDate);
+// setting today midnight
+const todayMidnight = new Date();
+todayMidnight.setDate(todayMidnight.getDate() + 1)
+todayMidnight.setUTCHours(0,0,0,0);
 
-  if (timePassed > 1) {
-    localStorage.removeItem("dayCtr");
-  }
-})();
+const midnightUnix = Math.floor(todayMidnight.getTime() / 1000);
 
-localStorage.setItem("dayCtrCreateDate", Date.now());
+// Retrieving current time and converting date to UNIX
+const rightNow = Math.floor(new Date() / 1000);
 
-if (!dayCtr) {
-  localStorage.setItem('dayCtr', 0);
-} else {
-  days.textContent = dayCtr;
+
+const pastMidnight = () => {
+  return rightNow > midnight;
 }
+
+// Initializes local storage items if there are none
+(function setLocalStorageItems() {
+  if (!dayCtr) {
+    localStorage.setItem('dayCtr', 0);
+  } else {
+    days.textContent = dayCtr;
+  }
+  
+  if (!taskCtr) {
+    localStorage.setItem('taskCtr', 0);
+  }
+
+  if (pastMidnight()) {
+    localStorage.setItem('midnight', midnightUnix)
+  }
+
+})();
 
 // Handles logic for timer countdown
 const handleTimerClick = (time, selectedTimerTimeP) => {
@@ -65,7 +81,10 @@ for (let i = 0; i < timer.length; i++) {
       if (timesRun === timerStopCondition) {
         clearInterval(interval)
         timerDisplayDiv[i].style.display = 'none';
-        timerLength[i].innerHTML = 'Done!'
+        timerLength[i].innerHTML = 'Done!';
+        taskCtr++;
+        console.log(taskCtr);
+        localStorage.setItem('taskCtr', taskCtr);
       };
       timesRun++;
 
@@ -77,16 +96,3 @@ for (let i = 0; i < timer.length; i++) {
     }(), 1);
   });
 };
-
-// let completeCheck = setInterval(function () {
-//   for (let i = 0; i < timerLength.length; i++) {
-//     if (timerLength[i].innerHTML === 'Done!') {
-//       taskCtr++;
-//     } 
-//   }
-
-//   if (taskCtr === timerLength.length) {
-//     clearInterval(completeCheck)
-//   }
-//   console.log(taskCtr);
-// }, 1000)
