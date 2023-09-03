@@ -64,7 +64,7 @@ const complete = () => {
 
   if (pastMidnight()) {
     reset();
-  } else if (!pastMidnight() && parseInt(taskCtr) === timer.length) {
+  } else if (!pastMidnight() && parseInt(taskCtr) >= timer.length) {
     complete();
   }
 
