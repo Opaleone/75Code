@@ -4,10 +4,12 @@ const timer = document.querySelectorAll('.timer-clicker');
 const timerLength = document.querySelectorAll('.timer-length');
 const days = document.querySelector('#day-counter');
 
+let timerIndexArr = [];
 
 let dayCtr = localStorage.getItem('dayCtr');
 let taskCtr = localStorage.getItem('taskCtr');
 let midnight = localStorage.getItem('midnight');
+let parsedTimerIndex = JSON.parse(localStorage.getItem('timerIndex'));
 
 
 // setting today midnight
@@ -30,8 +32,16 @@ const pastMidnight = () => {
 }
 
 const reset = () => {
+  if (parsedTimerIndex.length !== timer.length) {
+    localStorage.setItem('dayCtr', 0);
+  } else {
+    localStorage.setItem('dayCtr', ++dayCtr);
+    days.textContent = dayCtr;
+  }
+
   localStorage.setItem('midnight', midnightUnix);
-  localStorage.setItem('taskCtr', 0);
+  localStorage.setItem('timerIndex', JSON.stringify(timerIndexArr))
+
 
   for (let i = 0; i < timer.length; i++) {
     timerLength[i].innerHTML = timerLength[i].textContent;
@@ -41,8 +51,10 @@ const reset = () => {
 
 const complete = () => {
   for (let i = 0; i < timer.length; i++) {
-    timerLength[i].innerHTML = 'Done!';
-    timer[i].style.display = 'none';
+    if (parsedTimerIndex.includes(i)) {
+      timerLength[i].innerHTML = 'Done!';
+      timer[i].style.display = 'none';
+    }
   }
 }
 
@@ -53,22 +65,27 @@ const complete = () => {
   } else {
     days.textContent = dayCtr;
   }
-  
-  if (!taskCtr) {
-    localStorage.setItem('taskCtr', 0);
-  }
 
   if (!midnight) {
     localStorage.setItem('midnight', midnightUnix)
   }
 
+  if (!parsedTimerIndex) {
+    localStorage.setItem('timerIndex', JSON.stringify(timerIndexArr));
+    location.reload();
+  }
+
   if (pastMidnight()) {
     reset();
-  } else if (!pastMidnight() && parseInt(taskCtr) >= timer.length) {
+  } else if (!pastMidnight()) {
     complete();
   }
 
 })();
+
+const timerIndexPush = (selectedTimerIndex) => {
+  parsedTimerIndex.push(selectedTimerIndex);
+}
 
 
 // Handles logic for timer countdown
@@ -112,9 +129,8 @@ for (let i = 0; i < timer.length; i++) {
         clearInterval(interval)
         timerDisplayDiv[i].style.display = 'none';
         timerLength[i].innerHTML = 'Done!';
-        taskCtr++;
-        console.log(taskCtr);
-        localStorage.setItem('taskCtr', taskCtr);
+        timerIndexPush(i);
+        localStorage.setItem('timerIndex', JSON.stringify(parsedTimerIndex))
       };
       timesRun++;
 
