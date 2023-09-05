@@ -139,6 +139,6 @@ for (let i = 0; i < timer.length; i++) {
       timeInMs -= 1000;
 
       return start;
-    }(), 1);
+    }(), 1000);
   });
 };
