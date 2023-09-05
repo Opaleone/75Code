@@ -1,11 +1,12 @@
 :root {
-  --darkGray: #222;
-  --gray: #444;
-  --lightGray: #555;
-  --blackWhite: #aaa;
-  --darkWhite: #eee;
+  --darkGray: #1a1c1d;
+  --gray: #33373a;
+  --text-gray: #bdb7af;
+  --lightGray: #404548;
+  --blackWhite: #b2aca2;
+  --darkWhite: #dddad6;
   --white: #fff;
-  --aquaMarine: aquamarine;
+  --aquaMarine: #008060;
 
 }
 
@@ -108,6 +109,7 @@ li {
   margin: 0;
   margin-left: 50px;
   font-size: 50px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 #length-of-days {
@@ -142,7 +144,7 @@ li {
 #nav-underline {
   width: 100%;
   height: 10px;
-  background: linear-gradient(0.25turn, #11998E, #38EF7D);
+  background: linear-gradient(0.25turn, rgb(14, 122, 114), rgb(13, 167, 95));
   position: fixed;
   top: 5em;
 }
