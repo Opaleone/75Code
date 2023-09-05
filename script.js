@@ -87,8 +87,14 @@ const handleTimerClick = (time, selectedTimerTimeP) => {
   const m = mins - hours * 60;
   const s = secs - mins * 60;
 
-  selectedTimerTimeP.innerHTML = `${h}h ${m}m ${s}s`;
-  document.title = `${h}h ${m}m ${s}s`;
+  if (h >= 1) {
+    selectedTimerTimeP.innerHTML = `${h}h ${m}m ${s}s`;
+    document.title = `${h}h ${m}m ${s}s`;
+  } else {
+    selectedTimerTimeP.innerHTML = `${m}m ${s}s`;
+  document.title = `${m}m ${s}s`;
+  }
+  
 }
 
 /* **************************
