@@ -1,5 +1,8 @@
-const main = document.querySelector('#main');
-const card = document.querySelectorAll('.card');
+
+/* ***************
+  GLOBAL VARIABLES
+ ***************** */
+
 const timer = document.querySelectorAll('.timer-clicker');
 const timerLength = document.querySelectorAll('.timer-length');
 const days = document.querySelector('#day-counter');
@@ -7,7 +10,6 @@ const days = document.querySelector('#day-counter');
 let timerIndexArr = [];
 
 let dayCtr = localStorage.getItem('dayCtr');
-let taskCtr = localStorage.getItem('taskCtr');
 let midnight = localStorage.getItem('midnight');
 let parsedTimerIndex = JSON.parse(localStorage.getItem('timerIndex'));
 
@@ -27,9 +29,9 @@ const midnightUnix = Math.floor(todayMidnight.getTime() / 1000 + midnightTimezon
 const rightNow = Math.floor(new Date() / 1000);
 
 
-const pastMidnight = () => {
-  return rightNow > midnight;
-}
+/* **********************
+  FUNCTION DECLARATIONS
+ ********************** */
 
 const reset = () => {
   if (parsedTimerIndex.length !== timer.length) {
@@ -58,33 +60,12 @@ const complete = () => {
   }
 }
 
-// Initializes local storage items if there are none
-(function setLocalStorageItems() {
-  if (!dayCtr) {
-    localStorage.setItem('dayCtr', 0);
-  } else {
-    days.textContent = dayCtr;
-  }
-
-  if (!midnight) {
-    localStorage.setItem('midnight', midnightUnix)
-  }
-
-  if (!parsedTimerIndex) {
-    localStorage.setItem('timerIndex', JSON.stringify(timerIndexArr));
-    location.reload();
-  }
-
-  if (pastMidnight()) {
-    reset();
-  } else if (!pastMidnight()) {
-    complete();
-  }
-
-})();
-
 const timerIndexPush = (selectedTimerIndex) => {
   parsedTimerIndex.push(selectedTimerIndex);
+}
+
+const pastMidnight = () => {
+  return rightNow > midnight;
 }
 
 
@@ -110,6 +91,38 @@ const handleTimerClick = (time, selectedTimerTimeP) => {
   document.title = `${h}h ${m}m ${s}s`;
 }
 
+/* **************************
+  IIFE for LocalStorage Items
+ ************************** */
+
+// Initializes local storage items if there are none
+(function setLocalStorageItems() {
+  if (!dayCtr) {
+    localStorage.setItem('dayCtr', 0);
+  } else {
+    days.textContent = dayCtr;
+  }
+
+  if (!midnight) {
+    localStorage.setItem('midnight', midnightUnix)
+  }
+
+  if (!parsedTimerIndex) {
+    localStorage.setItem('timerIndex', JSON.stringify(timerIndexArr));
+    location.reload();
+  }
+
+  if (pastMidnight()) {
+    reset();
+  } else if (!pastMidnight()) {
+    complete();
+  }
+
+})();
+
+/* ***************
+  EVENT LISTENERS
+ *************** */
 
 // Creates event listener for each timer start btn
 for (let i = 0; i < timer.length; i++) {
