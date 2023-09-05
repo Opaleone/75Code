@@ -1,7 +1,7 @@
 :root {
   --darkGray: #1a1c1d;
   --gray: #33373a;
-  --text-gray: #bdb7af;
+  --text-gray: #ddd;
   --lightGray: #404548;
   --blackWhite: #b2aca2;
   --darkWhite: #dddad6;
@@ -59,7 +59,7 @@ li {
 .timer-text {
   text-align: center;
   display: flex;
-  color: var(--gray)
+  color: var(--text-gray)
 }
 
 .timer-length {
