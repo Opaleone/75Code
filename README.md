@@ -5,6 +5,7 @@ Website mimicking functionality of 75Hard workout program, redesigned for lazy c
 
 
 ## Usage
+
 ![Website Screenshot](./assets/const-screenshot.png)
 
 This website is designed to motivate you to complete tasks that will improve your skills in programming. 
